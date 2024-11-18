@@ -292,7 +292,7 @@ export class SuperGif {
                 // If we disposed every frame including first frame up to this point, then we have
                 // no composited frame to restore to. In this case, restore to background instead.
                 if (this.disposalRestoreFromIdx !== null) {
-                    this.frame.putImageData(frames[this.disposalRestoreFromIdx].data, 0, 0);
+                    (this.frame.putImageData(frames[this.disposalRestoreFromIdx] as any).data, 0, 0);
                 } else {
                     this.frame.clearRect(this.lastImg.leftPos, this.lastImg.topPos, this.lastImg.width, this.lastImg.height);
                 }

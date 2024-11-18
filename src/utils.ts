@@ -20,6 +20,9 @@ export class SuperGifUtils {
         let readCode = function (size) {
             let code = 0;
             for (let i = 0; i < size; i++) {
+                if (pos >= data.length * 8) {
+                    return null; // 返回 null 以指示读取超出范围
+                }
                 if (data.charCodeAt(pos >> 3) & (1 << (pos & 7))) {
                     code |= 1 << i;
                 }
@@ -54,7 +57,10 @@ export class SuperGifUtils {
         while (true) {
             last = code;
             code = readCode(codeSize);
-
+            // 检查 code 是否为 null
+            if (code === null) {
+                break; // 退出循环
+            }
             if (code === clearCode) {
                 clear();
                 continue;
